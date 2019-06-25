@@ -6,3 +6,5 @@ An online shopping website built with web2py and vue.js, which allows user to:
     (2) leave reviews and ratings
     (3) read others' reviews and ratings
     (4) buy products
+
+![](screenshots/chrome_yt5x8GSW8n.png)
