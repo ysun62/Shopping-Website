@@ -1,0 +1,99 @@
+{{extend 'layout.html'}}
+<!-- <link rel="stylesheet" type="text/css" href="{{ = URL('static/css', 'myapp.css') }}" /> -->
+<script src="{{=URL('static', 'js/vue.min.js')}}"></script>
+<script>
+    var getLoggedInUserURL = "{{ = URL('api', 'get_logged_in_user') }}";
+    var getProductListURL = "{{=URL('api', 'get_product_list')}}";
+    var getYourReviewURL = "{{=URL('api', 'get_your_review')}}";
+    var isLoggedIn = {{='false' if auth.user is None else 'true'}}; 
+    var saveReviewURL = "{{ = URL('api', 'save_review', user_signature=True) }}";
+    var getOtherReviewsURL = "{{ = URL('api', 'get_other_reviews') }}";
+    var updateStarURL = "{{ = URL('api', 'update_star', user_signature=True) }}";
+    var storeCartURL = "{{ = URL('api', 'store_cart', user_signature=True) }}";
+    var getCartSizeURL = "{{ = URL('api', 'get_cart_size', user_signature=True) }}";
+    var getCartURL = "{{ = URL('api', 'get_cart', user_signature=True) }}";
+    var removeProdURL = "{{ = URL('api', 'remove_product', user_signature=True) }}";
+    var removeAllURL = "{{ = URL('api', 'remove_all', user_signature=True) }}";
+    var getCartProductIDURL = "{{ = URL('api', 'get_cart', user_signature=True) }}";
+</script>
+
+<div id="vue-div">
+    <div v-if="page == 'cart'">
+        {{ include 'default/view_cart.html' }}
+    </div>
+
+    
+    <div v-if="page == 'shopping'">
+        <div class="move-right">
+            <button @click="page = 'cart'">Cart: ${ cart_size }</button>
+        </div>
+
+        <!-- search bar -->
+        <div class="search-bar">
+            <input type="text" v-model="search_string" @input="filterProducts" class="search" placeholder="Search"> 
+            <i class="fa fa-search" aria-hidden="true"></i>
+        </div>
+        <div class = "all-products">
+            <div v-for="product in products" v-if="!product.isHidden" class="product-container">
+                <!-- displaying the products -->
+                <h6 class="product-name">${ product.name } $${ product.price }</h6>
+                <div class="product-description">${ product.description }</div>
+                <!-- displaying the product.avg with stars and a review button -->
+                <div class="star-and-review">
+                    <span class="star" v-for="i in star_indices">
+                        <i v-if="i<=product.avg" class="fa fa-star"></i>
+                        <i v-if="i>product.avg" class="fa fa-star-o"></i>
+                    </span>
+                    
+                    <button class="product-review" @click="getYourReview(product.index); getOtherReviews(product.index); toggleReviewsSection(product.index);">Review</button>
+                </div>
+
+                
+                <input type="number" v-model="product.buyQuantity" @keyup.enter="storeCart(product.index)" placeholder="How much would you like to purchase?" min="1">
+                <div class="move-right">
+                    <button class="buy-button" @click="storeCart(product.index)">Buy</button>
+                </div>
+
+                <!-- showing reviews -->
+                <div v-if="product.showReviews">
+                    <!-- showing yourReview if the user is logged in -->
+                    <div v-if="loggedInUser != undefined">
+                        <div class="your-review">Your Review: </div>
+                        <div class="star_modified" v-for="i in star_indices" @mouseleave="leaveStar(product.index)">
+                            <i v-if="i<=product.yourReview.rating" @mouseover="hoverStar(product.index, i)" @click="clickStar(product.index, i)" class="fa fa-star"></i>
+                            <i v-if="i>product.yourReview.rating" @mouseover="hoverStar(product.index, i)" @click="clickStar(product.index, i)" class="fa fa-star-o"></i>
+                        </div>
+                        <textarea v-model="product.yourReview.body" class="review-body"></textarea>
+                        <!-- save review button -->
+                        <div class="move-right">
+                            <button v-if="!product.yourReview.hasBeenSaved" @click="saveReview(product.index)" class="save-button">Save</button>
+                            <button v-if="product.yourReview.hasBeenSaved" class="save-button">
+                                Saved
+                                <i class="fa fa-check" style="color:green"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <!-- showing otherReviews  -->
+                    <div v-if="product.otherReviews.length > 0">Other Reviews: 
+                        <div class="other-review" v-for="review in product.otherReviews">
+                            <div class="other-review-star" v-for="i in star_indices">
+                                <i v-if="i<=review.rating" class="fa fa-star"></i>
+                                <i v-if="i>review.rating" class="fa fa-star-o"></i>
+                            </div>
+                            <div class="other-review-body">${ review.body }</div>
+                            <div class="other-review-name">${ review.name }</div>
+                        </div>
+                        <!-- close review button -->
+                        <div class="move-right">
+                            <button class="close-button" @click="toggleReviewsSection(product.index)">Close Reviews</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<script src="{{=URL('static', 'js/default_index.js')}}"></script>

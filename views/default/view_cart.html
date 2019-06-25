@@ -1,0 +1,27 @@
+<h2 class="products">Your Shopping Cart: </h2>
+<div class="move-right">
+    <button @click="page = 'shopping'">Continue Shopping</button>
+</div>
+<div class="all-products" v-if="cart.length != 0">
+    <div>Note: Hit "Enter" to change the quantity</div>
+    <div class="product_container" v-for="p in cart">
+        <div class="product_name">${ p.name }</div>
+        <div class="product_price">$${ p.price }</div>
+        <div class="product_quantity">Quantity</div>
+        <input type="number" min="1" v-model.number="p.buyQuantity" @keyup.enter="updateBuyQuantity(p.index)" class="input_box">
+        <button class="trash-can" @click="removeProduct(p.index)" >Remove  <i class="fa fa-trash" aria-hidden="true"></i></button>
+    </div>
+    <h4 class="totalAmount" v-if="cart.length != 0">Order Total: $${ cart_total }</h4>
+    <div class="m">
+        <a class="btn" href="#popup1" @click="removeAll()">Place Order</a>
+    </div>
+    <div class="modal" id="popup1">
+        <div class="twothirds rounded white padded">
+            <h4>Thank you for your order of $${ cart_total }</h4>
+            <a class="close" href="#" @click="resetCartTotal()">×</a>
+            <div class="right">
+                <a class="close btn" href="#" @click="resetCartTotal()">close</a>
+            </div>
+        </div>
+    </div>
+</div>
