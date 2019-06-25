@@ -9,6 +9,7 @@ An online shopping website built with web2py and vue.js, which allows user to:
 
 
 Below are screenshots of the website.
+
 (1) Shopping Page
 ![](screenshots/chrome_yt5x8GSW8n.png)
 
