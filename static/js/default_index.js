@@ -143,14 +143,6 @@ let clickStar = function(productIndex, Numstar) {
     product.yourReview.rating = Numstar;
     product.yourReview.numStars = product.yourReview.rating;
 
-   // console.log(product.yourReview.numStars); testing
-
-    // $.post(updateStarURL, {
-    //     product_id: product.id,
-    //     user_email: app.loggedInUser,
-    //     rating: Numstar
-    // });
-
    // Calculating average
     let sum = 0;
     let length = product.otherReviews.length + 1; // Total length of reviews
@@ -208,12 +200,6 @@ let updateCart = function(productIndex) {
     else if(p.buyQuantity === null) {
         return;
     }
-
-    // $.getJSON(getCartURL, {
-    //     email: app.loggedInUser
-    // }, function(response) {
-    //     app.cart = response.cart;
-    // });
 
     // Loops through the current cart array; if products are in the cart, set alreadyPresent of
     // the product to true, and updates the buyQuantity of the products in the cart
@@ -337,12 +323,6 @@ let removeAll = function() {
         return;
     }
 
-    // app.cart = [];
-    // app.cart_size = 0;
-    // for(let i=0; i<app.products.length; i++) {
-    //     app.products[i].buyQuantity = null;
-    //     app.products[i].alreadyPresent = false;
-
     $.post(removeAllURL, {
         email: app.loggedInUser
     });
@@ -387,12 +367,6 @@ let updateBuyQuantity = function(productIndex) {
     }
     newCartTotal();
 };
-
-// let openModal = function() {
-//     var modal = document.getElementById("popup1");
-//     var span = document.getElementsByClassName("close")[0];
-//     modal.style.display = "block";
-// };
 
 let app = new Vue({
    el: "#vue-div",

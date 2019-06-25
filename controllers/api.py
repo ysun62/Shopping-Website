@@ -105,15 +105,6 @@ def store_cart():
     )
     return "stored"
 
-# @auth.requires_login()
-# def store_cart_number():
-#     db.shopping_cart.update_or_insert(
-#         ((db.shopping_cart.user_email == request.vars.email) & (db.shopping_cart.product_id == request.vars.product_id)),
-#         product_id = request.vars.product_id,
-#         already_present = request.vars.already_present
-#     )
-#     return "ai"
-
 @auth.requires_login()
 def remove_product():
     db((db.shopping_cart.user_email == request.vars.email) & (db.shopping_cart.product_id == request.vars.product_id)).delete()
