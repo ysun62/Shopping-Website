@@ -1,6 +1,6 @@
 CMPS 183 Spring 2019
 
-A full-stack online shopping website built with Web2py and Vue.js, which allows the user to:
+A full-stack online shopping website implemented with Web2py and Vue.js, which allows the user to:
 
     (1) create products
     (2) leave reviews and ratings
