@@ -1,6 +1,6 @@
 CMPS 183 Spring 2019
 
-Desktop version available at https://ysun62.pythonanywhere.com/shopping_site/default/index (mobile version in working progress)
+Available at https://ysun62.pythonanywhere.com/shopping_site/default/index
 
 A full-stack online shopping website implemented with Web2py and Vue.js, which allows the user to:
 
