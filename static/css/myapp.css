@@ -1,19 +1,54 @@
 .search-bar {
   display: flex;
   justify-content: center;
-  margin: 0 auto;
+  align-items: center;
+  margin: 30px auto 0 auto;
   width: 500px;
+}
+.search {
   border: 1px solid black;
 }
 
 .fa-search {
-  margin-top: 4px;
   margin-right: 4px;
 }
 
 .products {
   display: flex;
   justify-content: center;
+}
+
+.product-container {
+  color: #bb8833;
+  border: 1px solid black;
+  background-color: #EFEFEF;
+  padding: 10px 20px;
+  margin-top: 20px;
+  width: 600px;
+  text-align: left;
+  border-radius: 15px;
+}
+
+@media screen and (max-width: 800px) {
+  .search-bar {
+    width: 55%;
+  }
+  .product-container {
+    width: 400px;
+  }
+}
+
+@media screen and (max-width: 550px) {
+  .search-bar {
+    width: 70%;
+  }
+  .product-container {
+    width: 105%;
+  }
+}
+
+.product-description {
+  margin-bottom: 20px;
 }
 
 .all-products {
@@ -36,12 +71,6 @@
 
 .other-review-star {
   display: inline-flex;
-  /* flex-direction: row; */
-  /* justify-content: flex-start; */
-  /* align-items: flex-start; */
-  /* position: relative; */
-  /* bottom: 18px; */
-  /* left: 120px; */
 }
 
 .your-review {
@@ -52,9 +81,10 @@
 
 .other-review {
   border: 1px solid black;
-  background-color:#EFEFEF;
+  background-color:#f5f5f5;
   padding: 10px 20px;
   margin-bottom: 20px;
+  font-weight: normal;
 }
 
 .review-body {
@@ -70,21 +100,6 @@
 .other-review-name {
   margin-top: 20px;
   text-align: right;
-}
-
-.product-container {
-  color: #bb8833;
-  border: 1px solid black;
-  background-color: #EFEFEF;
-  padding: 10px 20px;
-  margin-top: 20px;
-  width: 600px;
-  text-align: left;
-  border-radius: 15px;
-}
-
-.product-description {
-  margin-bottom: 20px;
 }
 
 .star-and-review {
@@ -168,3 +183,4 @@
 .totalAmount {
   margin-top: 10px;
 }
+

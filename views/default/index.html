@@ -30,8 +30,9 @@
 
         <!-- search bar -->
         <div class="search-bar">
-            <input type="text" v-model="search_string" @input="filterProducts" class="search" placeholder="Search"> 
             <i class="fa fa-search" aria-hidden="true"></i>
+            <input type="text" v-model="search_string" @input="filterProducts" class="search" placeholder="Search"> 
+            
         </div>
         <div class = "all-products">
             <div v-for="product in products" v-if="!product.isHidden" class="product-container">
@@ -74,7 +75,7 @@
                         </div>
                     </div>
                     <!-- showing otherReviews  -->
-                    <div v-if="product.otherReviews.length > 0">Other Reviews: 
+                    <div v-if="product.otherReviews.length > 0" style="font-weight: bold">Other Reviews: 
                         <div class="other-review" v-for="review in product.otherReviews">
                             <div class="other-review-star" v-for="i in star_indices">
                                 <i v-if="i<=review.rating" class="fa fa-star"></i>
